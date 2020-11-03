@@ -6,7 +6,7 @@ class Api::V1::UsersController < Api::BaseController
   end
 
   def update
-    if current_api_v1_user.update_attributes(user_params)
+    if current_api_v1_user.update(user_params)
       render partial: 'api/v1/users/user', locals: { user: current_api_v1_user }
     else
       render json: current_api_v1_user.errors, status: :not_acceptable
@@ -16,6 +16,6 @@ class Api::V1::UsersController < Api::BaseController
   private
 
   def user_params
-    params.permit(:email, :name, :surname, :phone, :password)
+    params[:user].permit(:email, :name, :surname, :phone, :password)
   end
 end
