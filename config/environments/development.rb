@@ -9,6 +9,9 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
+  # Disable yarn integrity (for Docker)
+  config.webpacker.check_yarn_integrity = false
+
   # Show full error reports.
   config.consider_all_requests_local = true
 
@@ -27,6 +30,9 @@ Rails.application.configure do
 
     config.cache_store = :null_store
   end
+
+  # Default URL
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
