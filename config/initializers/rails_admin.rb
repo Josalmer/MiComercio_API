@@ -26,8 +26,8 @@ RailsAdmin.config do |config|
   ## To disable Gravatar integration in Navigation Bar set to false
   # config.show_gravatar = true
 
-  config.excluded_models = []
-  excluded_creatable_models = []
+  config.excluded_models = %w[ActiveStorage::Attachment ActiveStorage::Blob]
+  excluded_creatable_models = ['Address']
 
   config.label_methods = [:to_s]
 
@@ -56,5 +56,14 @@ RailsAdmin.config do |config|
   end
   config.model User do
     navigation_label 'Usuarios'
+  end
+  config.model CompanyCategory do
+    parent Company
+  end
+  config.model CompanyType do
+    parent Company
+  end
+  config.model Address do
+    parent Company
   end
 end
