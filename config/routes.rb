@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       devise_for :users, defaults: { format: :json }
       resource :user, only: %i[show update]
+      resources :companies, only: %i[index show update]
+      get 'manager_companies' => 'companies#manager_companies'
     end
   end
 end

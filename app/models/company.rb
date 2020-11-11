@@ -23,14 +23,6 @@ class Company < ApplicationRecord
     file_url
   end
 
-  def simultaneous_number
-    simultaneous_appointment_number.present? && simultaneous_appointment_number.positive? ? simultaneous_appointment_number : 1
-  end
-
-  def duration
-    appointment_duration.present? && appointment_duration.positive? ? appointment_duration : 15
-  end
-
   def self.by_type(type)
     all.select { |a| a.type == type }
   end
