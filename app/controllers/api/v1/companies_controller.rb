@@ -4,7 +4,24 @@ class Api::V1::CompaniesController < Api::BaseController
   end
 
   def index
-    @companies = Company.all
+    @companies = Company.publisheds
+  end
+
+  def create
+    if current_api_v1_user.organization_manager
+      company = Company.new(name: create_company[:name])
+      company.company_type = CompanyType.find(create_company[:company_type])
+      company.save_resized_image(create_company[:logo]) if create_company[:logo].present?
+      company.user = User.find(current_api_v1_user.id)
+      if company.save
+        @companies = Company.by_manager(current_api_v1_user.id)
+        render :index
+      else
+        render json: company.errors, status: :not_acceptable
+      end
+    else
+      render json: { error: I18n.t('custom.unauthorized_action') }, status: 422
+    end
   end
 
   def update
@@ -14,6 +31,17 @@ class Api::V1::CompaniesController < Api::BaseController
       update_company
     else
       render json: { error: I18n.t('custom.unauthorized_action') }, status: 422
+    end
+  end
+
+  def update_image
+    load_company
+    if params[:logo].present? && current_api_v1_user.id == @company.user.id
+      if @company.save_resized_image(params[:logo])
+        render partial: 'api/v1/companies/company', locals: { company: @company }
+      else
+        render json: @company.errors, status: 422
+      end
     end
   end
 
@@ -41,9 +69,17 @@ class Api::V1::CompaniesController < Api::BaseController
     end
   end
 
-  def update_company_direction
-    direction = @company.direction
-    direction.update_attributes(edit_company_direction)
+  def update_company_address
+    address = @company.address
+    address.update_attributes(edit_company_address)
+  end
+
+  def create_company
+    params[:created_company_object].permit(
+      :name,
+      :company_type,
+      :logo
+    )
   end
 
   def edit_company
@@ -55,12 +91,13 @@ class Api::V1::CompaniesController < Api::BaseController
       :web,
       :mail,
       :phone,
-      :description
+      :description,
+      :published
     )
   end
 
   def edit_company_address
-    params[:edited_address_object].permit(
+    params[:edited_direction_object].permit(
       :cp,
       :town,
       :province,
@@ -68,6 +105,12 @@ class Api::V1::CompaniesController < Api::BaseController
       :direction,
       :latitude,
       :longitude
+    )
+  end
+
+  def edit_image
+    params[:edited_logo_object].permit(
+      :logo
     )
   end
 end

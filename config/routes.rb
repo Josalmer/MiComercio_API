@@ -10,8 +10,11 @@ Rails.application.routes.draw do
     namespace :v1 do
       devise_for :users, defaults: { format: :json }
       resource :user, only: %i[show update]
-      resources :companies, only: %i[index show update]
+      resources :companies
+      resources :categories, only: %i[index]
+      resources :types, only: %i[index]
       get 'manager_companies' => 'companies#manager_companies'
+      patch 'company_image/:id' => 'companies#update_image'
     end
   end
 end

@@ -7,6 +7,7 @@ class Company < ApplicationRecord
   belongs_to :company_type
 
   scope :by_manager, ->(id) { where(user_id: id) }
+  scope :publisheds, -> { where(published: true) }
 
   delegate :category, to: :company_type
   delegate :type, to: :company_type

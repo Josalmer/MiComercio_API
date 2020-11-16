@@ -6,10 +6,10 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:user)
     sign_up(@user)
-    @jsonHeaders = { "Accept": "application/json", "Content-Type": "application/json" }
+    @jsonHeaders = { "Accept": 'application/json', "Content-Type": 'application/json' }
   end
 
-  test "index function gives user data" do
+  test 'index function gives user data' do
     get '/api/v1/user', headers: @jsonHeaders
     assert_response :success
   end
@@ -23,5 +23,4 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
     patch '/api/v1/user', as: :json, headers: @json_headers, params: { email: 'wrong_email' }
     assert_response :not_acceptable
   end
-
 end
