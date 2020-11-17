@@ -12,6 +12,7 @@ json.web company.web
 json.mail company.mail
 json.phone company.phone
 json.description company.description
+json.validated company.user.validated_manager
 json.address do
   json.partial! 'api/v1/addresses/address', address: company.address if company.address.direction != company.name
 end

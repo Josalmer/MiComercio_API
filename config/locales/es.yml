@@ -15,16 +15,18 @@ es:
       company: Negocios
       company_category: Categorías de negocios
       company_type: Tipo de negocios
+      payment_preference: Preferencias de pago
     attributes:
       user:
         name: Nombre
         surname: Apellidos
         phone: Teléfono
-        company_manager: Gestor de Negocio
+        organization_manager: Gestor de Negocio
         admin: Administrador
         password: Contraseña
         created_at: Creado el
         updated_at: Actualizado el
+        payment_preference: Preferencias de pago
       address:
         town: Población
         province: Provincia
@@ -48,6 +50,14 @@ es:
         company_type: Tipo de negocio
       company_type:
         company_type: Tipo
+      payment_preference:
+        user: Usuario
+        type: Tipo de pago
+        number: Nº de documento
+        bank: Banco
+        expiration_month: Fecha de expiración, mes
+        expiration_year: Fecha de expiración, año
+        validated: Validado
     errors:
       messages:
         record_invalid: 'La validación falló: %{errors}'

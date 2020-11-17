@@ -57,6 +57,9 @@ RailsAdmin.config do |config|
   config.model User do
     navigation_label 'Usuarios'
   end
+  config.model PaymentPreference do
+    parent User
+  end
   config.model CompanyCategory do
     parent Company
   end
