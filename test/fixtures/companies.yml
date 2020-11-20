@@ -5,7 +5,13 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
+  id: 1
   name: company test1
-#
+  company_type_id: 1
+  user_id: 3
+
 two:
+  id: 2
   name: company test2
+  company_type_id: 2
+  user_id: 3

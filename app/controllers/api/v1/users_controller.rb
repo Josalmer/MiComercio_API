@@ -17,7 +17,9 @@ class Api::V1::UsersController < Api::BaseController
     if current_api_v1_user.payment_preference.update(payment_params)
       render partial: 'api/v1/users/user', locals: { user: current_api_v1_user }
     else
+      # :nocov:
       render json: current_api_v1_user.payment_preference.errors, status: :not_acceptable
+      # :nocov:
     end
   end
 

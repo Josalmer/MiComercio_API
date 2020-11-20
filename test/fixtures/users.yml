@@ -5,6 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 user:
+  id: 1
   name: user
   surname: test1
   email: email1@mail.com
@@ -15,6 +16,7 @@ user:
   jti:  <%= SecureRandom.uuid %>
 
 admin:
+  id: 2
   name: admin
   surname: test2
   email: email2@mail.com
@@ -25,6 +27,7 @@ admin:
   jti:  <%= SecureRandom.uuid %>
 
 manager:
+  id: 3
   name: manager
   surname: test3
   email: email3@mail.com

@@ -5,7 +5,11 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
+  id: 1
+  company_id: 1
   direction: test1 address
-#
+
 two:
+  id: 2
+  company_id: 2
   direction: test2 address

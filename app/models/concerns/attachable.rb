@@ -20,10 +20,6 @@ module Attachable
     attached_file&.attachment && Rails.application.routes.url_helpers.url_for(attached_file)
   end
 
-  def file_name
-    attached_file&.attachment && attached_file&.filename&.to_s
-  end
-
   def resize_image(image)
     h = image.height
     w = image.width

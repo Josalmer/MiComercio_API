@@ -65,7 +65,9 @@ class Api::V1::CompaniesController < Api::BaseController
     if @company.update_attributes(edit_company)
       render partial: 'api/v1/companies/company', locals: { company: @company }
     else
+      # :nocov:
       render json: @company.errors, status: 422
+      # :nocov:
     end
   end
 
@@ -105,12 +107,6 @@ class Api::V1::CompaniesController < Api::BaseController
       :direction,
       :latitude,
       :longitude
-    )
-  end
-
-  def edit_image
-    params[:edited_logo_object].permit(
-      :logo
     )
   end
 end
