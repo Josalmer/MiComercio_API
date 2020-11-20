@@ -11,16 +11,53 @@ es:
   activerecord:
     models:
       user: Usuarios
+      address: Direcciones
+      company: Negocios
+      company_category: Categorías de negocios
+      company_type: Tipo de negocios
+      payment_preference: Preferencias de pago
     attributes:
       user:
         name: Nombre
         surname: Apellidos
         phone: Teléfono
-        company_manager: Gestor de Negocio
+        organization_manager: Gestor de Negocio
         admin: Administrador
         password: Contraseña
         created_at: Creado el
         updated_at: Actualizado el
+        payment_preference: Preferencias de pago
+      address:
+        town: Población
+        province: Provincia
+        country: Pais
+        direction: Dirección
+        latitude: Latitud
+        longitude: Longitud
+      company:
+        user: Gestor
+        company_type: Tipo de Negocio
+        name: Nombre
+        diary_client_limit: Límite de citas por cliente y día
+        monthly_client_limit: Límite de citas por cliente y mes
+        web: Web del negocio
+        mail: Email de atención al cliente
+        phone: Teléfono
+        description: Descripción
+        attached_file: Logo
+      company_category:
+        category: Categoría
+        company_type: Tipo de negocio
+      company_type:
+        company_type: Tipo
+      payment_preference:
+        user: Usuario
+        type: Tipo de pago
+        number: Nº de documento
+        bank: Banco
+        expiration_month: Fecha de expiración, mes
+        expiration_year: Fecha de expiración, año
+        validated: Validado
     errors:
       messages:
         record_invalid: 'La validación falló: %{errors}'

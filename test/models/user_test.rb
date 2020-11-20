@@ -5,7 +5,7 @@ class UserTest < ActiveSupport::TestCase
     @user = users(:user)
   end
 
-  test "user has to_s" do
+  test 'user has to_s' do
     @user.to_s
     assert :success
   end

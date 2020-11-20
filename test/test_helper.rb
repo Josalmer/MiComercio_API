@@ -2,7 +2,6 @@ ENV['RAILS_ENV'] ||= 'test'
 
 require 'simplecov'
 SimpleCov.start 'rails' do
-
   ENV['RAILS_ENV'] ||= 'test'
 
   add_filter 'app/mailers/application_mailer.rb'
@@ -11,7 +10,6 @@ SimpleCov.start 'rails' do
   add_filter 'app/channels/application_cable/channel.rb'
   add_filter 'app/controllers/api/v1/passwords_controller.rb'
   add_filter 'app/controllers/application_controller.rb'
-
 end
 
 require_relative 'helpers/authorization_helper'
@@ -27,7 +25,7 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
-  def json_response 
+  def json_response
     JSON.parse(response.body)
   end
 end

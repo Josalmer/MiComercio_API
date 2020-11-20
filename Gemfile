@@ -30,6 +30,7 @@ gem 'cancancan'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-jwt'
+gem 'mini_magick'
 gem 'rack-cors'
 gem 'rails_admin', '~> 2.0'
 

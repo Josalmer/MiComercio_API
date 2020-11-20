@@ -1,0 +1,6 @@
+json.type payment_preference.payment_type
+json.number payment_preference.number
+json.bank payment_preference.bank
+json.expirationMonth payment_preference.expiration_month
+json.expirationYear payment_preference.expiration_year
+json.validated payment_preference.validated
