@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_082433) do
 
   create_table "payment_preferences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "type"
+    t.integer "payment_type"
     t.string "number"
     t.string "bank"
     t.string "expiration_month"

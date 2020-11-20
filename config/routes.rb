@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       devise_for :users, defaults: { format: :json }
       resource :user, only: %i[show update]
+      patch 'update_manager_preferences' => 'users#update_payment_preferences'
       resources :companies
       resources :categories, only: %i[index]
       resources :types, only: %i[index]

@@ -13,9 +13,21 @@ class Api::V1::UsersController < Api::BaseController
     end
   end
 
+  def update_payment_preferences
+    if current_api_v1_user.payment_preference.update(payment_params)
+      render partial: 'api/v1/users/user', locals: { user: current_api_v1_user }
+    else
+      render json: current_api_v1_user.payment_preference.errors, status: :not_acceptable
+    end
+  end
+
   private
 
   def user_params
     params[:user].permit(:email, :name, :surname, :phone, :password)
+  end
+
+  def payment_params
+    params[:newPaymentPreference].permit(:payment_type, :bank, :number, :expiration_month, :expiration_year)
   end
 end
