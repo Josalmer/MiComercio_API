@@ -5,6 +5,17 @@ es:
     contact: Contacto
     terms: Politica de privacidad y cookies
     about: Sobre nosotros
+    organization_manager_validation: El usuario debe ser organizador de organización
+    limit_must_be_0_or_higher: Los limites no pueden tomar valor negativo, 0 para no aplicar limites
+    not_overlap_hours: No se pueden solapar las horas
+    not_overlap_dates: No se pueden solapar las fechas
+    closing_time_after_opening: La hora de cierre debe ser posterior a la hora de apertura
+    end_date_after_start: La fecha de fin debe ser posterior a la fecha de inicio
+    only_company_or_schedule: Solo puede asociarse a un negocio o a un horario especial
+    company_monthly_limit_reached: Alcanzado límite de citas mensuales en este negocio
+    company_diary_limit_reached: Alcanzado límite de citas diario en este negocio
+    no_appointment_available: Se han agotado las citas para la hora seleccionada
+    created_by_manager_or_have_user: No se puede asignar a un usuario si lo ha creado un manager
   unauthorized:
     manage:
       all: "No estas autorizado para acceder a esa página."
