@@ -16,6 +16,13 @@ Rails.application.routes.draw do
       resources :types, only: %i[index]
       get 'manager_companies' => 'companies#manager_companies'
       patch 'company_image/:id' => 'companies#update_image'
+      resources :company_hours, only: %i[create destroy]
+      resources :special_schedules, only: %i[create destroy]
+      resources :calendar_events, only: %i[index]
+      resources :appointments, only: %i[create index]
+      get 'user_appointments_for_company/:id' => 'appointments#user_appointments_for_company'
+      get 'company_appointments/:id' => 'appointments#company_appointments'
+      patch 'cancel_appointment/:id' => 'appointments#cancel_appointment'
     end
   end
 end

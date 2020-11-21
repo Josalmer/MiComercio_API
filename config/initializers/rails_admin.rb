@@ -70,9 +70,9 @@ RailsAdmin.config do |config|
     parent Company
   end
   config.model CompanyHour do
-    navigation_label 'Horarios'
+    parent Company
   end
   config.model SpecialSchedule do
-    navigation_label 'Horarios'
+    parent Company
   end
 end

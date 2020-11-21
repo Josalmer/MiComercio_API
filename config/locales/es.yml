@@ -27,6 +27,9 @@ es:
       company_category: Categorías de negocios
       company_type: Tipo de negocios
       payment_preference: Preferencias de pago
+      appointment: Citas
+      special_schedule: Período especial
+      company_hour: Horas de apertura
     attributes:
       user:
         name: Nombre
