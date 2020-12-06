@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_17_082433) do
+ActiveRecord::Schema.define(version: 2020_11_21_084057) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -47,6 +47,23 @@ ActiveRecord::Schema.define(version: 2020_11_17_082433) do
     t.index ["company_id"], name: "index_addresses_on_company_id"
   end
 
+  create_table "appointments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "company_id"
+    t.bigint "user_id"
+    t.boolean "created_by_manager", default: false
+    t.string "user_name"
+    t.string "user_phone"
+    t.datetime "requested_at"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "finished_at"
+    t.datetime "removed_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_appointments_on_company_id"
+    t.index ["user_id"], name: "index_appointments_on_user_id"
+  end
+
   create_table "companies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "company_type_id"
@@ -72,6 +89,18 @@ ActiveRecord::Schema.define(version: 2020_11_17_082433) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "company_hours", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "company_id"
+    t.bigint "special_schedule_id"
+    t.integer "day", null: false
+    t.time "opening_time", null: false
+    t.time "closing_time", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_company_hours_on_company_id"
+    t.index ["special_schedule_id"], name: "index_company_hours_on_special_schedule_id"
+  end
+
   create_table "company_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "company_type"
     t.bigint "company_category_id"
@@ -91,6 +120,17 @@ ActiveRecord::Schema.define(version: 2020_11_17_082433) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_payment_preferences_on_user_id"
+  end
+
+  create_table "special_schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "company_id"
+    t.boolean "closed"
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "simultaneous_appointment_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_special_schedules_on_company_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

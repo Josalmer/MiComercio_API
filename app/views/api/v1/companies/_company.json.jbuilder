@@ -1,5 +1,6 @@
 json.id company.id
 json.name company.name
+json.fistAvailableAppointment company.fist_available_appointment
 json.published company.published
 json.logo company.logo
 json.type company.type
@@ -15,4 +16,10 @@ json.description company.description
 json.validated company.user.validated_manager
 json.address do
   json.partial! 'api/v1/addresses/address', address: company.address if company.address&.direction != company.name
+end
+json.hours company.company_hours do |hour|
+  json.partial! 'api/v1/company_hours/company_hour', company_hour: hour
+end
+json.specialSchedules company.special_schedules.not_finished do |schedule|
+  json.partial! 'api/v1/special_schedules/special_schedule', special_schedule: schedule
 end

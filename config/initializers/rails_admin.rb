@@ -69,4 +69,10 @@ RailsAdmin.config do |config|
   config.model Address do
     parent Company
   end
+  config.model CompanyHour do
+    parent Company
+  end
+  config.model SpecialSchedule do
+    parent Company
+  end
 end
