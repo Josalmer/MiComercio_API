@@ -9,9 +9,13 @@ one:
   name: company test1
   company_type_id: 1
   user_id: 3
+  diary_client_limit: 1
+  monthly_client_limit: 1
 
 two:
   id: 2
   name: company test2
   company_type_id: 2
   user_id: 3
+  diary_client_limit: 1
+  monthly_client_limit: 1

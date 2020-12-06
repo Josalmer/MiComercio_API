@@ -15,7 +15,7 @@ class Company < ApplicationRecord
   delegate :category, to: :company_type
   delegate :type, to: :company_type
 
-  validate :validate_user_is_manager
+  validate :validate_user_is_manager, :check_limit
 
   after_create :create_address
 
@@ -64,9 +64,9 @@ class Company < ApplicationRecord
   private
 
   def check_limit
-    return unless diary_client_limit.negative? || monthly_client_limit.negative?
-
-    errors.add(:error, I18n.t('errors.custom.limit_must_be_0_or_higher'))
+    if diary_client_limit.negative? || monthly_client_limit.negative?
+      errors.add(:error, I18n.t('errors.custom.limit_must_be_0_or_higher'))
+    end
   end
 
   def validate_user_is_manager
@@ -80,8 +80,10 @@ class Company < ApplicationRecord
   def check_day(day)
     hours = []
     if special_schedules.not_finished.by_date(day).any?
+      # :nocov:
       schedule = special_schedules.not_finished.by_date(day).first
       hours = schedule.company_hours.where(day: day.wday)
+      # :nocov:
     else
       hours = company_hours.where(day: day.wday)
     end
@@ -95,12 +97,12 @@ class Company < ApplicationRecord
   end
 
   def check_hour(day, hour)
-    appointments_number = (((hour.closing_time - hour.opening_time) / 60) / appointment_duration).ceil
+    appointments_number = (((hour.closing_time - hour.opening_time) / 60) / duration).ceil
     appointments_number.times do |order_number|
       start_time = day
       end_time = day
-      opening_time = hour.opening_time + (order_number * appointment_duration).minutes
-      closing_time = opening_time + appointment_duration.minutes
+      opening_time = hour.opening_time + (order_number * duration).minutes
+      closing_time = opening_time + duration.minutes
       closing_time = hour.closing_time if closing_time > hour.closing_time
       start_time = start_time.change({ hour: opening_time.hour, min: opening_time.min })
       end_time = end_time.change({ hour: closing_time.hour, min: closing_time.min })
@@ -109,11 +111,13 @@ class Company < ApplicationRecord
         return first_appointment if first_appointment
       end
     end
+    # :nocov:
     false
+    # :nocov:
   end
 
   def check_appointment(start_time, end_time)
     current_appointments = appointments.active.by_start_and_end_date(start_time, end_time).count
-    current_appointments < simultaneous_appointment_number ? { start: start_time, end: end_time } : false
+    current_appointments < simultaneous_number ? { start: start_time, end: end_time } : false
   end
 end

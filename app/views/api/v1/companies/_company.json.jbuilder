@@ -23,4 +23,3 @@ end
 json.specialSchedules company.special_schedules.not_finished do |schedule|
   json.partial! 'api/v1/special_schedules/special_schedule', special_schedule: schedule
 end
-

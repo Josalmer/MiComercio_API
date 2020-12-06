@@ -1,5 +1,6 @@
 class CalendarEvent
   attr_accessor :from, :to, :busy_slot, :total_slot
+
   def initialize(company, from, to)
     @from = from
     @to = to

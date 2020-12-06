@@ -41,7 +41,7 @@ class Api::V1::AppointmentsController < Api::BaseController
     if appointment.update(removed_at: Time.current)
       head 200
     else
-      head 422
+      head :not_acceptable
     end
   end
 
