@@ -30,6 +30,8 @@ es:
       appointment: Citas
       special_schedule: Período especial
       company_hour: Horas de apertura
+      notification: Notificaciones
+      device_token: Token de dispositivo
     attributes:
       user:
         name: Nombre
@@ -41,6 +43,8 @@ es:
         created_at: Creado el
         updated_at: Actualizado el
         payment_preference: Preferencias de pago
+        notifications: Notificaciones
+        device_tokens: Token de dispositivo
       address:
         town: Población
         province: Provincia
@@ -72,6 +76,14 @@ es:
         expiration_month: Fecha de expiración, mes
         expiration_year: Fecha de expiración, año
         validated: Validado
+      notification:
+        title: Título
+        summary: Resumen
+        body: Cuerpo
+        user: Usuario
+      device_token:
+        token: Token
+        user: Usuario
     errors:
       messages:
         record_invalid: 'La validación falló: %{errors}'

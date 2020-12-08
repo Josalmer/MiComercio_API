@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_one :payment_preference, dependent: :destroy
   has_many :companies
   has_many :appointments, dependent: :destroy
+  has_many :notifications, dependent: :destroy
+  has_many :device_tokens, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true, format: { with: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]{2,4}$\z/i }
 
