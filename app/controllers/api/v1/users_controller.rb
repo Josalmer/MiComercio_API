@@ -23,6 +23,16 @@ class Api::V1::UsersController < Api::BaseController
     end
   end
 
+  def update_notification_preferences
+    if current_api_v1_user.notification_preference.update(notification_params)
+      render partial: 'api/v1/users/user', locals: { user: current_api_v1_user }
+    else
+      # :nocov:
+      render json: current_api_v1_user.notification_preference.errors, status: :not_acceptable
+      # :nocov:
+    end
+  end
+
   private
 
   def user_params
@@ -31,5 +41,9 @@ class Api::V1::UsersController < Api::BaseController
 
   def payment_params
     params[:newPaymentPreference].permit(:payment_type, :bank, :number, :expiration_month, :expiration_year)
+  end
+
+  def notification_params
+    params[:newNotificationPreference].permit(:active, :user_1_week_before, :user_1_day_before, :user_1_hour_before, :user_when_manager_cancel_appointment, :manager_appointment_requested, :manager_appointment_cancelled)
   end
 end
