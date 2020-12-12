@@ -67,6 +67,9 @@ RailsAdmin.config do |config|
   config.model PaymentPreference do
     parent User
   end
+  config.model NotificationPreference do
+    parent User
+  end
   config.model CompanyCategory do
     parent Company
   end

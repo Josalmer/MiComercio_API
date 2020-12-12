@@ -7,6 +7,7 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: self
 
   has_one :payment_preference, dependent: :destroy
+  has_one :notification_preference, dependent: :destroy
   has_many :companies
   has_many :appointments, dependent: :destroy
   has_many :notifications, dependent: :destroy
@@ -16,7 +17,7 @@ class User < ApplicationRecord
 
   scope :admin, -> { where(admin: true) }
 
-  after_create :create_payment_preference
+  after_create :create_payment_preference, :create_notification_preference
 
   def to_s
     email
@@ -30,5 +31,9 @@ class User < ApplicationRecord
 
   def create_payment_preference
     PaymentPreference.create(user_id: id) if organization_manager
+  end
+
+  def create_payment_preference
+    NotificationPreference.create(user_id: id)
   end
 end

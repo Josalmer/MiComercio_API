@@ -27,6 +27,7 @@ es:
       company_category: Categorías de negocios
       company_type: Tipo de negocios
       payment_preference: Preferencias de pago
+      notification_preference: Preferencias de notificaciones
       appointment: Citas
       special_schedule: Período especial
       company_hour: Horas de apertura
@@ -43,6 +44,7 @@ es:
         created_at: Creado el
         updated_at: Actualizado el
         payment_preference: Preferencias de pago
+        notification_preference: Preferencias de notificaciones
         notifications: Notificaciones
         device_tokens: Token de dispositivo
       address:
@@ -76,6 +78,15 @@ es:
         expiration_month: Fecha de expiración, mes
         expiration_year: Fecha de expiración, año
         validated: Validado
+      notification_preference:
+        user: Usuario
+        active: Activo
+        user_1_week_before: Aviso para usuario, 1 semana antes de la cita
+        user_1_day_before: Aviso para usuario, 1 día antes de la cita
+        user_1_hour_before: Aviso para usuario, 1 hora antes de la cita
+        user_when_manager_cancel_appointment: Aviso para usuario, cuando el dueño del negocio cancela su cita
+        manager_appointment_requested: Aviso para dueño de negocio, cuando se reserva una cita
+        manager_appointment_cancelled: Aviso para dueño de negocio, cuando se cancela una cita
       notification:
         title: Título
         summary: Resumen
