@@ -23,6 +23,10 @@ class User < ApplicationRecord
     email
   end
 
+  def full_name
+    "#{name} #{surname}"
+  end
+
   def validated_manager
     payment_preference && payment_preference.validated
   end

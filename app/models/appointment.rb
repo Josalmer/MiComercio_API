@@ -29,6 +29,29 @@ class Appointment < ApplicationRecord
 
   validate :check_month_limit, :check_day_limit, :check_concurrency, :created_by_manager_or_have_user, on: :create
 
+  def create_manager_notification(action)
+    manager = company.user
+    if manager&.notification_preference.active && manager&.device_tokens.any? && manager&.notification_preference.send(action)
+      notification_params = {
+        user_id: manager.id
+      }
+      notification_params = notification_params.merge(send("#{action}_notification_params"))
+      notification = Notification.new(notification_params)
+      notification.save
+    end
+  end
+
+  def create_user_notification(action)
+    if user&.notification_preference.active && user&.device_tokens.any? && user&.notification_preference.send(action)
+      notification_params = {
+        user_id: user.id
+      }
+      notification_params = notification_params.merge(send("#{action}_notification_params"))
+      notification = Notification.new(notification_params)
+      notification.save
+    end
+  end
+
   private
 
   def fill_appointment_data
@@ -62,5 +85,47 @@ class Appointment < ApplicationRecord
   def check_concurrency
     current_appointments_at_time = company.appointments.active.by_start_and_end_date(start_date, end_date).count
     errors.add(:error, I18n.t('custom.no_appointment_available')) if current_appointments_at_time >= company.simultaneous_number
+  end
+
+  def manager_appointment_requested_notification_params
+    {
+      title: I18n.t('notifications.manager_appointment_requested.title', company: company.name ),
+      summary: I18n.t('notifications.manager_appointment_requested.summary', company: company.name, user: user.full_name, date: start_date.strftime("%-d/%-m"), time: start_date.strftime("%H:%M") )
+    }
+  end
+
+  def manager_appointment_cancelled_notification_params
+    {
+      title: I18n.t('notifications.manager_appointment_cancelled.title', company: company.name ),
+      summary: I18n.t('notifications.manager_appointment_cancelled.summary', company: company.name, user: user.full_name, date: start_date.strftime("%-d/%-m"), time: start_date.strftime("%H:%M") )
+    }
+  end
+
+  def user_1_week_before_notification_params
+    {
+      title: I18n.t('notifications.user_1_week_before.title' ),
+      summary: I18n.t('notifications.user_1_week_before.summary', company: company.name, date: start_date.strftime("%-d/%-m") )
+    }
+  end
+
+  def user_1_day_before_notification_params
+    {
+      title: I18n.t('notifications.user_1_day_before.title' ),
+      summary: I18n.t('notifications.user_1_day_before.summary', company: company.name, time: start_date.strftime("%H:%M") )
+    }
+  end
+
+  def user_1_hour_before_notification_params
+    {
+      title: I18n.t('notifications.user_1_hour_before.title' ),
+      summary: I18n.t('notifications.user_1_hour_before.summary', company: company.name )
+    }
+  end
+
+  def user_when_manager_cancel_appointment_notification_params
+    {
+      title: I18n.t('notifications.user_when_manager_cancel_appointment.title', company: company.name ),
+      summary: I18n.t('notifications.user_when_manager_cancel_appointment.summary', company: company.name, date: start_date.strftime("%-d/%-m"), time: start_date.strftime("%H:%M") )
+    }
   end
 end

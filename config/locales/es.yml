@@ -311,3 +311,24 @@ es:
       long: "%-d de %B de %Y %H:%M"
       short: "%-d de %b %H:%M"
     pm: pm
+
+  notifications:
+    manager_appointment_requested:
+      title: Se ha solicitado una cita en %{company}
+      summary: El usuario %{user} ha solicitado una cita en %{company} para el %{date} a las %{time}
+    manager_appointment_cancelled:
+      title: Se ha cancelado una cita en %{company}
+      summary: El usuario %{user} ha cancelado su cita de el %{date} a las %{time} en %{company}
+    user_1_week_before:
+      title: Recordatorio de cita esta semana
+      summary: Le recordamos que el día %{date} tiene cita en %{company}, 
+    user_1_day_before:
+      title: Recordatorio de cita mañana
+      summary: Le recordamos que mañana tiene cita en %{company} a las %{time}
+    user_1_hour_before:
+      title: Recordatorio de cita en una hora
+      summary: Le recordamos que en una hora tiene cita en %{company}
+    user_when_manager_cancel_appointment:
+      title: Han cancelado su cita en %{company}
+      summary: Han cancelado su cita del %{date} a las %{time} en %{company}
+    
