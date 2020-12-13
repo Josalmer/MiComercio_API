@@ -6,6 +6,7 @@ class Api::V1::AppointmentsController < Api::BaseController
 
     appointment.user_id = current_api_v1_user.id unless new_appointment_params['created_by_manager']
     if appointment.save
+      appointment.create_manager_notification('manager_appointment_requested') unless new_appointment_params['created_by_manager']
       render partial: 'api/v1/appointments/appointment', locals: { appointment: appointment }
     else
       render json: appointment.errors, status: :not_acceptable
@@ -39,6 +40,11 @@ class Api::V1::AppointmentsController < Api::BaseController
     appointment = Appointment.find(id_permitted['id'])
 
     if appointment.update(removed_at: Time.current)
+      if current_api_v1_user == appointment.company.user
+        appointment.create_user_notification('user_when_manager_cancel_appointment')
+      else
+        appointment.create_manager_notification('manager_appointment_cancelled')
+      end
       head 200
     else
       head :not_acceptable
