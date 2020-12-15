@@ -52,6 +52,24 @@ class Appointment < ApplicationRecord
     end
   end
 
+  def self.check_and_send_diary_notifications
+    Appointment.active.between_dates((Time.current + 1.day).beginning_of_day, (Time.current + 1.day).end_of_day).each do |appointment|
+      appointment.create_user_notification('daily_reminder')
+    end
+  end
+
+  def self.check_and_send_weekly_notifications
+    Appointment.active.between_dates((Time.current + 1.day).beginning_of_day, (Time.current + 6.day).end_of_day).each do |appointment|
+      appointment.create_user_notification('weekly_reminder')
+    end
+  end
+
+  def self.check_and_send_hourly_notification
+    Appointment.active.between_dates((Time.current + 1.hour), (Time.current + 1.hour + 5.minutes)).each do |appointment|
+      appointment.create_user_notification('hourly_reminder')
+    end
+  end
+
   private
 
   def fill_appointment_data
@@ -89,43 +107,64 @@ class Appointment < ApplicationRecord
 
   def manager_appointment_requested_notification_params
     {
-      title: I18n.t('notifications.manager_appointment_requested.title', company: company.name ),
-      summary: I18n.t('notifications.manager_appointment_requested.summary', company: company.name, user: user.full_name, date: start_date.strftime("%-d/%-m"), time: start_date.strftime("%H:%M") )
+      title: I18n.t('notifications.manager_appointment_requested.title', company: company.name),
+      summary: I18n.t('notifications.manager_appointment_requested.summary', company: company.name, user: user.full_name, date: start_date.strftime('%-d/%-m'), time: start_date.strftime('%H:%M'))
     }
   end
 
   def manager_appointment_cancelled_notification_params
     {
-      title: I18n.t('notifications.manager_appointment_cancelled.title', company: company.name ),
-      summary: I18n.t('notifications.manager_appointment_cancelled.summary', company: company.name, user: user.full_name, date: start_date.strftime("%-d/%-m"), time: start_date.strftime("%H:%M") )
+      title: I18n.t('notifications.manager_appointment_cancelled.title', company: company.name),
+      summary: I18n.t('notifications.manager_appointment_cancelled.summary', company: company.name, user: user.full_name, date: start_date.strftime('%-d/%-m'), time: start_date.strftime('%H:%M'))
     }
   end
 
   def user_1_week_before_notification_params
     {
-      title: I18n.t('notifications.user_1_week_before.title' ),
-      summary: I18n.t('notifications.user_1_week_before.summary', company: company.name, date: start_date.strftime("%-d/%-m") )
+      title: I18n.t('notifications.user_1_week_before.title'),
+      summary: I18n.t('notifications.user_1_week_before.summary', company: company.name, date: start_date.strftime('%-d/%-m'))
     }
   end
 
   def user_1_day_before_notification_params
     {
-      title: I18n.t('notifications.user_1_day_before.title' ),
-      summary: I18n.t('notifications.user_1_day_before.summary', company: company.name, time: start_date.strftime("%H:%M") )
+      title: I18n.t('notifications.user_1_day_before.title'),
+      summary: I18n.t('notifications.user_1_day_before.summary', company: company.name, time: start_date.strftime('%H:%M'))
     }
   end
 
   def user_1_hour_before_notification_params
     {
-      title: I18n.t('notifications.user_1_hour_before.title' ),
-      summary: I18n.t('notifications.user_1_hour_before.summary', company: company.name )
+      title: I18n.t('notifications.user_1_hour_before.title'),
+      summary: I18n.t('notifications.user_1_hour_before.summary', company: company.name)
     }
   end
 
   def user_when_manager_cancel_appointment_notification_params
     {
-      title: I18n.t('notifications.user_when_manager_cancel_appointment.title', company: company.name ),
-      summary: I18n.t('notifications.user_when_manager_cancel_appointment.summary', company: company.name, date: start_date.strftime("%-d/%-m"), time: start_date.strftime("%H:%M") )
+      title: I18n.t('notifications.user_when_manager_cancel_appointment.title', company: company.name),
+      summary: I18n.t('notifications.user_when_manager_cancel_appointment.summary', company: company.name, date: start_date.strftime('%-d/%-m'), time: start_date.strftime('%H:%M'))
+    }
+  end
+
+  def daily_reminder_notification_params
+    {
+      title: I18n.t('notifications.daily_reminder.title', company: company.name),
+      summary: I18n.t('notifications.daily_reminder.summary', company: company.name, time: start_date.strftime('%H:%M'))
+    }
+  end
+
+  def weekly_reminder_notification_params
+    {
+      title: I18n.t('notifications.weekly_reminder.title', company: company.name),
+      summary: I18n.t('notifications.weekly_reminder.summary', company: company.name, date: start_date.strftime('%-d/%-m'), time: start_date.strftime('%H:%M'))
+    }
+  end
+
+  def hourly_reminder_notification_params
+    {
+      title: I18n.t('notifications.hourly_reminder.title', company: company.name),
+      summary: I18n.t('notifications.hourly_reminder.summary', company: company.name)
     }
   end
 end

@@ -33,6 +33,7 @@ gem 'devise-jwt'
 gem 'mini_magick'
 gem 'rack-cors'
 gem 'rails_admin', '~> 2.0'
+gem 'whenever', require: false # For periodic jobs
 
 gem 'bootstrap', '~> 5.0.0.alpha1'
 
