@@ -10,6 +10,7 @@ class Notification < ApplicationRecord
   private
 
   def send_notification
+    # :nocov:
     fcm_client = FCM.new(Rails.application.credentials.fcm_server_key)
     options = {
       data: { message: summary },
@@ -31,5 +32,6 @@ class Notification < ApplicationRecord
       response = fcm_client.send(token, options)
       puts response if response[:status_code] != 200
     end
+    # :nocov:
   end
 end
