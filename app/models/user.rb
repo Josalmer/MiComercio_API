@@ -34,7 +34,9 @@ class User < ApplicationRecord
   private
 
   def create_payment_preference
+    # :nocov:
     PaymentPreference.create(user_id: id) if organization_manager
+    # :nocov:
   end
 
   def create_payment_preference

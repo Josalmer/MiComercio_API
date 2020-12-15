@@ -331,13 +331,4 @@ es:
     user_when_manager_cancel_appointment:
       title: Han cancelado su cita en %{company}
       summary: Han cancelado su cita del %{date} a las %{time} en %{company}
-    daily_reminder:
-      title: Le recordamos que mañana tiene cita en %{company}
-      summary: Le recordamos que mañana a las %{time} tiene cita en %{company}
-    weekly_reminder:
-      title: Le recordamos que esta semana tiene cita en %{company}
-      summary: Le recordamos que el día %{date} a las %{time} tiene cita en %{company}
-    hourly_reminder:
-      title: Le recordamos que en una hora tiene cita en %{company}
-      summary: Le recordamos que en una hora tiene cita en %{company}
     
