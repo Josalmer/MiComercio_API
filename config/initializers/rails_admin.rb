@@ -54,10 +54,20 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+
+  config.model Notification do
+    navigation_label 'Usuarios'
+  end
   config.model User do
     navigation_label 'Usuarios'
   end
+  config.model DeviceToken do
+    parent User
+  end
   config.model PaymentPreference do
+    parent User
+  end
+  config.model NotificationPreference do
     parent User
   end
   config.model CompanyCategory do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_21_084057) do
+ActiveRecord::Schema.define(version: 2020_12_12_113111) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -107,6 +107,38 @@ ActiveRecord::Schema.define(version: 2020_11_21_084057) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_category_id"], name: "index_company_types_on_company_category_id"
+  end
+
+  create_table "device_tokens", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "token"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_device_tokens_on_user_id"
+  end
+
+  create_table "notification_preferences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id"
+    t.boolean "active", default: true, null: false
+    t.boolean "user_1_week_before", default: true, null: false
+    t.boolean "user_1_day_before", default: true, null: false
+    t.boolean "user_1_hour_before", default: true, null: false
+    t.boolean "user_when_manager_cancel_appointment", default: true, null: false
+    t.boolean "manager_appointment_requested", default: true, null: false
+    t.boolean "manager_appointment_cancelled", default: true, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_notification_preferences_on_user_id"
+  end
+
+  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "title"
+    t.string "summary"
+    t.text "body"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "payment_preferences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

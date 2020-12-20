@@ -38,4 +38,15 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
     }
     assert_response :success
   end
+
+  test 'success when updating user notification preferences' do
+    user = users(:user)
+    sign_up(user)
+    patch '/api/v1/update_notification_preferences', as: :json, headers: @json_headers, params: {
+      newNotificationPreference: {
+        active: 0
+      }
+    }
+    assert_response :success
+  end
 end

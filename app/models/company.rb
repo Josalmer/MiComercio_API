@@ -65,7 +65,9 @@ class Company < ApplicationRecord
 
   def check_limit
     if diary_client_limit.negative? || monthly_client_limit.negative?
+      # :nocov:
       errors.add(:error, I18n.t('errors.custom.limit_must_be_0_or_higher'))
+      # :nocov:
     end
   end
 

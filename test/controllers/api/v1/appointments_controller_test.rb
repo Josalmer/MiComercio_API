@@ -73,9 +73,16 @@ class Api::V1::AppointmentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_acceptable
   end
 
-  test 'success when cancelling an appointment' do
+  test 'success when cancelling an appointment as user' do
     user = users(:user)
     sign_up(user)
+    patch '/api/v1/cancel_appointment/2', as: :json, headers: @json_headers
+    assert_response :success
+  end
+
+  test 'success when cancelling an appointment as manager' do
+    manager = users(:manager)
+    sign_up(manager)
     patch '/api/v1/cancel_appointment/2', as: :json, headers: @json_headers
     assert_response :success
   end

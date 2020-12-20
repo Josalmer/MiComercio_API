@@ -7,17 +7,24 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: self
 
   has_one :payment_preference, dependent: :destroy
+  has_one :notification_preference, dependent: :destroy
   has_many :companies
   has_many :appointments, dependent: :destroy
+  has_many :notifications, dependent: :destroy
+  has_many :device_tokens, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true, format: { with: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]{2,4}$\z/i }
 
   scope :admin, -> { where(admin: true) }
 
-  after_create :create_payment_preference
+  after_create :create_payment_preference, :create_notification_preference
 
   def to_s
     email
+  end
+
+  def full_name
+    "#{name} #{surname}"
   end
 
   def validated_manager
@@ -27,6 +34,12 @@ class User < ApplicationRecord
   private
 
   def create_payment_preference
+    # :nocov:
     PaymentPreference.create(user_id: id) if organization_manager
+    # :nocov:
+  end
+
+  def create_payment_preference
+    NotificationPreference.create(user_id: id)
   end
 end

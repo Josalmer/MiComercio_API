@@ -33,8 +33,12 @@ gem 'devise-jwt'
 gem 'mini_magick'
 gem 'rack-cors'
 gem 'rails_admin', '~> 2.0'
+gem 'whenever', require: false # For periodic jobs
 
 gem 'bootstrap', '~> 5.0.0.alpha1'
+
+# Push notifications
+gem 'fcm'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
