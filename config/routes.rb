@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       devise_for :users, defaults: { format: :json }
+      resources :social_login, only: %i[create update], defaults: { format: :json }
       resource :user, only: %i[show update]
       resource :device_tokens, only: %i[update], defaults: { format: :json }
       patch 'update_manager_preferences' => 'users#update_payment_preferences'

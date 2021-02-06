@@ -16,6 +16,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]{2,4}$\z/i }
 
   scope :admin, -> { where(admin: true) }
+  scope :created_by_social_login, ->(provider) { where(provider: provider) }
 
   after_create :create_payment_preference, :create_notification_preference
 
