@@ -48,7 +48,9 @@ class Api::V1::SocialLoginController < Api::BaseController
     if @user.save
       render json: { success: true, email: @user.email, social_token: @user.social_token }
     else
+      # :nocov:
       render json: @user.errors, status: :not_acceptable
+      # :nocov:
     end
   end
 
@@ -82,7 +84,9 @@ class Api::V1::SocialLoginController < Api::BaseController
     if @user.update_columns(provider: user_params['provider'], social_token: user_params['social_token'])
       render json: { success: true, email: @user.email, social_token: @user.social_token }
     else
+      # :nocov:
       render json: @user.errors, status: :not_acceptable
+      # :nocov:
     end
   end
 

@@ -36,3 +36,5 @@ manager:
   organization_manager: true
   encrypted_password: <%= Devise::Encryptor.digest(User, '123456') %>
   jti:  <%= SecureRandom.uuid %>
+  provider: 'GOOGLE'
+  social_token: correct_social_token

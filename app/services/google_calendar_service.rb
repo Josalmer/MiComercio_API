@@ -6,12 +6,9 @@ class GoogleCalendarService
   class << self
   
     def service
+      # :nocov:
       @service
-    end
-    
-    def events
-      authorize if @service.nil?
-      @events ||= @service.list_events(calendar_id, max_results: 2500).items
+      # :nocov:
     end
 
     def create_event(mail, appointment)
@@ -36,13 +33,19 @@ class GoogleCalendarService
           use_default: true
         )
       )
-      result = @service.insert_event(calendar_id, event)
+      if Rails.env.development? || Rails.env.production?
+        # :nocov:
+        result = @service.insert_event(calendar_id, event)
+        # :nocov:
+      end
     end
   
   private
   
     def calendar_id
-      @calendar_id ||= Rails.application.credentials.calendar_id 
+      # :nocov:
+      @calendar_id ||= Rails.application.credentials.calendar_id
+      # :nocov:
     end
   
     def authorize

@@ -75,7 +75,6 @@ class Appointment < ApplicationRecord
 
   def export_google_calendar(manager)
     if manager
-      # GoogleCalendarService.get_calendars
       GoogleCalendarService.create_event(self.company.user.email, self)
       self.update_columns(exported_by_manager: Time.current)
     else

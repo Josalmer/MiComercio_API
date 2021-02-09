@@ -17,6 +17,7 @@ class User < ApplicationRecord
 
   scope :admin, -> { where(admin: true) }
   scope :created_by_social_login, ->(provider) { where(provider: provider) }
+  scope :by_email, ->(email) { where(email: email)}
 
   after_create :create_payment_preference, :create_notification_preference
 
