@@ -40,6 +40,9 @@ gem 'bootstrap', '~> 5.0.0.alpha1'
 # Push notifications
 gem 'fcm'
 
+# Google Calendar Integration
+gem 'google-api-client', require: 'google/apis/calendar_v3'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 

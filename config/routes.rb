@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       get 'user_appointments_for_company/:id' => 'appointments#user_appointments_for_company'
       get 'company_appointments/:id' => 'appointments#company_appointments'
       patch 'cancel_appointment/:id' => 'appointments#cancel_appointment'
+      patch 'export_appointments' => 'google_calendar_events#export_appointments'
     end
   end
 end
