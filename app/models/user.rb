@@ -41,7 +41,7 @@ class User < ApplicationRecord
     # :nocov:
   end
 
-  def create_payment_preference
+  def create_notification_preference
     NotificationPreference.create(user_id: id)
   end
 end
