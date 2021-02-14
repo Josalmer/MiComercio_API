@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       devise_for :users, defaults: { format: :json }
+      resources :social_login, only: %i[create update], defaults: { format: :json }
       resource :user, only: %i[show update]
       resource :device_tokens, only: %i[update], defaults: { format: :json }
       patch 'update_manager_preferences' => 'users#update_payment_preferences'
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
       get 'user_appointments_for_company/:id' => 'appointments#user_appointments_for_company'
       get 'company_appointments/:id' => 'appointments#company_appointments'
       patch 'cancel_appointment/:id' => 'appointments#cancel_appointment'
+      patch 'export_appointments' => 'google_calendar_events#export_appointments'
     end
   end
 end

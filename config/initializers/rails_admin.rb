@@ -60,6 +60,7 @@ RailsAdmin.config do |config|
   end
   config.model User do
     navigation_label 'Usuarios'
+    exclude_fields :provider, :social_token
   end
   config.model DeviceToken do
     parent User

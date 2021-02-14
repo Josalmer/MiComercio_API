@@ -12,6 +12,9 @@ class Appointment < ApplicationRecord
   scope :by_company, ->(id) { where(company_id: id) }
   scope :by_user_and_company, ->(user_id, company_id) { where(user_id: user_id, company_id: company_id) }
 
+  scope :manager_export_pending, -> { where(exported_by_manager: nil) }
+  scope :user_export_pending, -> { where(exported_by_user: nil) }
+
   scope :by_date, lambda { |date|
     where('start_date >= ? AND end_date <= ?',
           date.change({ hour: 0, min: 0, sec: 0 }), date.change({ hour: 23, min: 59, sec: 59 }))
@@ -67,6 +70,16 @@ class Appointment < ApplicationRecord
   def self.check_and_send_hourly_notification
     Appointment.active.between_dates((Time.current + 1.hour), (Time.current + 1.hour + 5.minutes)).each do |appointment|
       appointment.create_user_notification('user_1_hour_before')
+    end
+  end
+
+  def export_google_calendar(manager)
+    if manager
+      GoogleCalendarService.create_event(self.company.user.email, self)
+      self.update_columns(exported_by_manager: Time.current)
+    else
+      GoogleCalendarService.create_event(self.user.email, self)
+      self.update_columns(exported_by_user: Time.current)
     end
   end
 

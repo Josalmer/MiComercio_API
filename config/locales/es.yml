@@ -16,6 +16,7 @@ es:
     company_diary_limit_reached: Alcanzado límite de citas diario en este negocio
     no_appointment_available: Se han agotado las citas para la hora seleccionada
     created_by_manager_or_have_user: No se puede asignar a un usuario si lo ha creado un manager
+    new_account_from_social: No existe el usuario, necesarios datos adicionales
   unauthorized:
     manage:
       all: "No estas autorizado para acceder a esa página."
