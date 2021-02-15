@@ -332,4 +332,7 @@ es:
     user_when_manager_cancel_appointment:
       title: Han cancelado su cita en %{company}
       summary: Han cancelado su cita del %{date} a las %{time} en %{company}
+    new_assessment_available:
+      title: ¿Que tal ha sido su experiencia en %{company}?
+      summary: Hemos visto que recientemente ha estado en %{company}, entre en MiComercio y valore su experiencia desde la vista de %{company}
     

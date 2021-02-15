@@ -27,6 +27,10 @@ every '0 19 * * 0', output: 'log/check_and_send_weekly_notifications.log' do
   runner 'Appointment.check_and_send_weekly_notifications'
 end
 
+every '0 21 * * 0', output: 'log/create_user_company_assessment.log' do
+  runner 'Appointment.create_user_company_assessment'
+end
+
 every 5.minutes, output: 'log/check_and_send_hourly_notification.log' do
   runner 'Appointment.check_and_send_hourly_notification'
 end
