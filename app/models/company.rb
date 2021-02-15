@@ -7,6 +7,7 @@ class Company < ApplicationRecord
   has_many :company_hours, dependent: :destroy
   has_many :special_schedules, dependent: :destroy
   has_many :appointments, dependent: :destroy
+  has_many :user_company_assessments, dependent: :destroy
   belongs_to :company_type
 
   scope :by_manager, ->(id) { where(user_id: id) }
