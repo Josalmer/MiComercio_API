@@ -48,6 +48,10 @@ class Company < ApplicationRecord
     company_hours.pluck('day').uniq
   end
 
+  def pending_user_assessment(user_id)
+    user_company_assessments.by_user(user_id).pending.any?
+  end
+
   def fist_available_appointment
     if opening_days.any?
       current_checking_day = Time.current.beginning_of_day

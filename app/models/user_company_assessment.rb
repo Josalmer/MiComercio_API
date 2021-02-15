@@ -6,6 +6,7 @@ class UserCompanyAssessment < ApplicationRecord
   scope :by_user, ->(id) { where(user_id: id) }
   scope :by_company, ->(id) { where(company_id: id) }
   scope :filled, -> { where.not(filled_at: nil) }
+  scope :pending, -> { where(filled_at: nil) }
   scope :ordered_by_filled_date_asc, -> { order 'filled_at ASC' }
 
   after_create :notify_user

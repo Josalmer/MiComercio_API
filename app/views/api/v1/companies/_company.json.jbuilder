@@ -14,6 +14,7 @@ json.mail company.mail
 json.phone company.phone
 json.description company.description
 json.validated company.user.validated_manager
+json.pendingUserAssessment company.pending_user_assessment(current_api_v1_user.id)
 json.address do
   json.partial! 'api/v1/addresses/address', address: company.address if company.address&.direction != company.name
 end
@@ -22,4 +23,7 @@ json.hours company.company_hours do |hour|
 end
 json.specialSchedules company.special_schedules.not_finished do |schedule|
   json.partial! 'api/v1/special_schedules/special_schedule', special_schedule: schedule
+end
+json.assessments company.user_company_assessments.filled.ordered_by_filled_date_asc do |assessment|
+  json.partial! 'api/v1/assessments/assessment', assessment: assessment
 end
