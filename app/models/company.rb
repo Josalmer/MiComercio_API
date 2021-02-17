@@ -52,6 +52,19 @@ class Company < ApplicationRecord
     user_company_assessments.by_user(user_id).pending.any?
   end
 
+  def average_company_puntuation
+    n = user_company_assessments.filled.count
+    if n > 0
+      total = 0
+      total += user_company_assessments.filled.sum(:puntuality)
+      total += user_company_assessments.filled.sum(:attention)
+      total += user_company_assessments.filled.sum(:satisfaction)
+      average = (total / (n * 3.0)).round
+    else
+      0
+    end
+  end
+
   def fist_available_appointment
     if opening_days.any?
       current_checking_day = Time.current.beginning_of_day

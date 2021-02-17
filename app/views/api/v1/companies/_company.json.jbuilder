@@ -1,5 +1,6 @@
 json.id company.id
 json.name company.name
+json.averagePuntuation company.average_company_puntuation
 json.fistAvailableAppointment company.fist_available_appointment
 json.published company.published
 json.logo company.logo
