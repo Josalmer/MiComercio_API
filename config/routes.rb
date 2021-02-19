@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :categories, only: %i[index]
       resources :types, only: %i[index]
       get 'manager_companies' => 'companies#manager_companies'
+      get 'locations' => 'companies#companies_locations'
       patch 'company_image/:id' => 'companies#update_image'
       resources :company_hours, only: %i[create destroy]
       resources :special_schedules, only: %i[create destroy]
