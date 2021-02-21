@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_21_112059) do
+ActiveRecord::Schema.define(version: 2021_02_21_122810) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(version: 2021_02_21_112059) do
     t.string "province"
     t.string "country"
     t.string "direction"
-    t.integer "latitude"
-    t.integer "longitude"
+    t.decimal "latitude", precision: 14, scale: 10
+    t.decimal "longitude", precision: 14, scale: 10
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_addresses_on_company_id"
