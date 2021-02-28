@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_21_122810) do
+ActiveRecord::Schema.define(version: 2021_02_23_184048) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(version: 2021_02_21_122810) do
     t.integer "simultaneous_appointment_number"
     t.integer "appointment_duration"
     t.boolean "published", default: false, null: false
+    t.integer "boost_factor", default: 0, null: false
+    t.datetime "boost_validity"
     t.index ["company_type_id"], name: "index_companies_on_company_type_id"
     t.index ["user_id"], name: "index_companies_on_user_id"
   end

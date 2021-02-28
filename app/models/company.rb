@@ -12,6 +12,7 @@ class Company < ApplicationRecord
 
   scope :by_manager, ->(id) { where(user_id: id) }
   scope :publisheds, -> { where(published: true) }
+  scope :ordered_by_boost, -> { order 'boost_factor DESC' }
 
   delegate :category, to: :company_type
   delegate :type, to: :company_type

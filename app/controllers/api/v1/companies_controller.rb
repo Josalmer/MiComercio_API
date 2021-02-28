@@ -4,7 +4,7 @@ class Api::V1::CompaniesController < Api::BaseController
   end
 
   def index
-    @companies = Company.publisheds
+    @companies = Company.publisheds.ordered_by_boost
   end
 
   def create
