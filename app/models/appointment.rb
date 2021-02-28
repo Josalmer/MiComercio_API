@@ -25,6 +25,9 @@ class Appointment < ApplicationRecord
   scope :between_dates, lambda { |previous_date, after_date|
     where('start_date >= ? AND start_date <= ?', previous_date, after_date)
   }
+  scope :finished_between_dates, lambda { |previous_date, after_date|
+    where('end_date >= ? AND end_date <= ?', previous_date, after_date)
+  }
 
   scope :ordered_by_start_date_asc, -> { order 'start_date ASC' }
 
@@ -70,6 +73,14 @@ class Appointment < ApplicationRecord
   def self.check_and_send_hourly_notification
     Appointment.active.between_dates((Time.current + 1.hour), (Time.current + 1.hour + 5.minutes)).each do |appointment|
       appointment.create_user_notification('user_1_hour_before')
+    end
+  end
+
+  def self.create_user_company_assessment
+    Appointment.not_cancelled.finished_between_dates((Time.current - 1.day), Time.current).each do |appointment|
+      if appointment.user && UserCompanyAssessment.by_user_and_company(appointment.user.id, appointment.company.id).empty?
+        UserCompanyAssessment.create(user_id: appointment.user.id, company_id: appointment.company.id)
+      end
     end
   end
 

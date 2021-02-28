@@ -50,6 +50,11 @@ class Api::V1::CompaniesController < Api::BaseController
     render :index
   end
 
+  def companies_locations
+    @locations = Address.all.pluck('town').compact.map(&:capitalize).uniq
+    render json: @locations, status: 200
+  end
+
   private
 
   def load_company

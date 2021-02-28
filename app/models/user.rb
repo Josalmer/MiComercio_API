@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :appointments, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :device_tokens, dependent: :destroy
+  has_many :user_company_assessments, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true, format: { with: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]{2,4}$\z/i }
 

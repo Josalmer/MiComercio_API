@@ -7,6 +7,7 @@ class Company < ApplicationRecord
   has_many :company_hours, dependent: :destroy
   has_many :special_schedules, dependent: :destroy
   has_many :appointments, dependent: :destroy
+  has_many :user_company_assessments, dependent: :destroy
   belongs_to :company_type
 
   scope :by_manager, ->(id) { where(user_id: id) }
@@ -45,6 +46,23 @@ class Company < ApplicationRecord
 
   def opening_days
     company_hours.pluck('day').uniq
+  end
+
+  def pending_user_assessment(user_id)
+    user_company_assessments.by_user(user_id).pending.any?
+  end
+
+  def average_company_puntuation
+    n = user_company_assessments.filled.count
+    if n > 0
+      total = 0
+      total += user_company_assessments.filled.sum(:puntuality)
+      total += user_company_assessments.filled.sum(:attention)
+      total += user_company_assessments.filled.sum(:satisfaction)
+      average = (total / (n * 3.0)).round
+    else
+      0
+    end
   end
 
   def fist_available_appointment

@@ -1,0 +1,10 @@
+json.id assessment.id
+json.companyId assessment.company.id
+json.companyName assessment.company.name
+json.userId assessment.user.id
+json.filledAt assessment.filled_at
+json.text assessment.text
+json.averagePuntuation assessment.average_puntuation
+json.puntuality assessment.puntuality
+json.attention assessment.attention
+json.satisfaction assessment.satisfaction
