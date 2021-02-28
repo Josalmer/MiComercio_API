@@ -34,3 +34,7 @@ end
 every 5.minutes, output: 'log/check_and_send_hourly_notification.log' do
   runner 'Appointment.check_and_send_hourly_notification'
 end
+
+every '0 1 * * *', output: 'log/check_finished_boost.log' do
+  runner 'Company.check_finished_boost'
+end
