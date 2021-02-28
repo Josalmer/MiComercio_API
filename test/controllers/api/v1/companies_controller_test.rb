@@ -118,4 +118,11 @@ class Api::V1::CompaniesControllerTest < ActionDispatch::IntegrationTest
     }
     assert_response :unprocessable_entity
   end
+
+  test 'success when getting companies locations' do
+    user = users(:user)
+    sign_up(user)
+    get '/api/v1/locations', headers: @jsonHeaders
+    assert_response :success
+  end
 end

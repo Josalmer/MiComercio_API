@@ -11,7 +11,9 @@ class Api::V1::AssessmentsController < Api::BaseController
       @assessment.update_columns(filled_at: Time.current)
       render partial: 'api/v1/assessments/assessment', locals: { assessment: @assessment }
     else
+      # :nocov:
       render json: @assessment.errors, status: 422
+      # :nocov:
     end
   end
 
