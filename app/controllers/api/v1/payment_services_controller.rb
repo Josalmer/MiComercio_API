@@ -17,13 +17,31 @@ class Api::V1::PaymentServicesController < Api::BaseController
   end
 
   def create_offer
+    validity_date = ((Time.current + 1.day).beginning_of_day + create_offer_params['validity'].day)
+    payment_service_params = {
+      cost: 20,
+      user_id: current_api_v1_user.id,
+      company_id: create_offer_params['company_id'],
+      service: "Offer"
+    }
+    offer_params = {
+      company: create_offer_params['company_id'],
+      text: create_offer_params['text'],
+      discount: create_offer_params['discount'],
+      validity: validity_date
+    }
 
+    ActiveRecord::Base.transaction do
+      Offer.create(offer_params)
+      PaymentService.create(payment_service_params)
+      render partial: 'api/v1/companies/company', locals: { company: @company }
+    end
   end
 
   private
 
   def create_offer_params
-    params.permit(:company_id)
+    params['params'].permit(:company_id, :validity, :discount, :text)
   end
 
   def boost_company_params
