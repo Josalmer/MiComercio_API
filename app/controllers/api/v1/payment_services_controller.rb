@@ -11,7 +11,9 @@ class Api::V1::PaymentServicesController < Api::BaseController
       service: "Company Boost: #{boost_company_params['boost_factor']}% for #{boost_company_params['duration']} months"
     }
 
-    if @company.update_columns(boost_factor: boost_company_params['boost_factor'], boost_validity: validity_date) && PaymentService.create(payment_service_params)
+    ActiveRecord::Base.transaction do
+      @company.update_columns(boost_factor: boost_company_params['boost_factor'], boost_validity: validity_date)
+      PaymentService.create(payment_service_params)
       render partial: 'api/v1/companies/company', locals: { company: @company }
     end
   end
