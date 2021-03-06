@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       resources :assessments, only: %i[index update]
       patch 'boost_company' => 'payment_services#boost_company'
       patch 'create_offer' => 'payment_services#create_offer'
+      resources :offers, only: %i[index]
     end
   end
 end

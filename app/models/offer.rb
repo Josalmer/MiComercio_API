@@ -3,6 +3,10 @@ class Offer < ApplicationRecord
   validates :text, presence: true
   validates :validity, presence: true
 
+  scope :active, -> { where('validity > ?', Time.current.beginning_of_day) }
+
+  scope :ordered_by_validity, -> { order 'validity ASC' }
+
   after_create :send_notifications
 
   private
