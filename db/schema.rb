@@ -147,7 +147,7 @@ ActiveRecord::Schema.define(version: 2021_03_01_172242) do
 
   create_table "offers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "company_id"
-    t.string "text"
+    t.text "text"
     t.float "discount"
     t.datetime "validity"
     t.datetime "created_at", precision: 6, null: false
