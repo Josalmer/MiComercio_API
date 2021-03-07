@@ -7,10 +7,6 @@ class Offer < ApplicationRecord
 
   scope :ordered_by_validity, -> { order 'validity ASC' }
 
-  after_create :send_notifications
-
-  private
-
   def send_notifications
     users = company.appointments.map(&:user).uniq
     users.each do |user|
@@ -24,6 +20,8 @@ class Offer < ApplicationRecord
       end
     end
   end
+
+  private
 
   def offer_notifications_params
     {

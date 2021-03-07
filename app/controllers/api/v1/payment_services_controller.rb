@@ -33,7 +33,8 @@ class Api::V1::PaymentServicesController < Api::BaseController
     }
 
     ActiveRecord::Base.transaction do
-      Offer.create(offer_params)
+      offer = Offer.create(offer_params)
+      offer.send_notifications
       PaymentService.create(payment_service_params)
       render json: { success: true }
     end
