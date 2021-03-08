@@ -36,6 +36,10 @@ class AddCompanies < ActiveRecord::Migration[6.0]
       CompanyType.create(company_category_id: category.id, company_type: name)
     end
 
+    User.create(name: "Admin", admin: true, organization_manager: false, email: "admin@mail.com", password: "123456")
+    User.create(name: "Jose", surname: "Saldaña", admin: false, organization_manager: true, email: "manager1@mail.com", password: "123456")
+    User.create(name: "Alvaro", surname: "Saldaña", admin: false, organization_manager: true, email: "manager2@mail.com", password: "123456")
+    User.create(name: "Andrea", surname: "Saldaña", admin: false, organization_manager: true, email: "manager3@mail.com", password: "123456")
     # Negocios
     user = User.where(email: "manager1@mail.com").first
     user2 = User.where(email: "manager2@mail.com").first
