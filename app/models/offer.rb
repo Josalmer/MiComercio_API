@@ -10,7 +10,7 @@ class Offer < ApplicationRecord
   def send_notifications
     users = company.appointments.map(&:user).uniq
     users.each do |user|
-      if user&.notification_preference.active && user&.device_tokens.any?
+      if user&.notification_preference&.active && user&.device_tokens.any?
         notification_params = {
           user_id: user.id
         }
