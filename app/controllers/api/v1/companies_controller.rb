@@ -4,7 +4,7 @@ class Api::V1::CompaniesController < Api::BaseController
   end
 
   def index
-    @companies = Company.publisheds
+    @companies = Company.publisheds.ordered_by_boost
   end
 
   def create
@@ -51,7 +51,7 @@ class Api::V1::CompaniesController < Api::BaseController
   end
 
   def companies_locations
-    @locations = Address.all.pluck('town').compact.map(&:capitalize).uniq
+    @locations = Address.all.pluck('town').compact.map(&:capitalize).uniq.sort
     render json: @locations, status: 200
   end
 

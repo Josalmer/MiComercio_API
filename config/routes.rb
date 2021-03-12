@@ -29,6 +29,9 @@ Rails.application.routes.draw do
       patch 'cancel_appointment/:id' => 'appointments#cancel_appointment'
       patch 'export_appointments' => 'google_calendar_events#export_appointments'
       resources :assessments, only: %i[index update]
+      patch 'boost_company' => 'payment_services#boost_company'
+      patch 'create_offer' => 'payment_services#create_offer'
+      resources :offers, only: %i[index]
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_21_122810) do
+ActiveRecord::Schema.define(version: 2021_03_01_172242) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(version: 2021_02_21_122810) do
     t.integer "simultaneous_appointment_number"
     t.integer "appointment_duration"
     t.boolean "published", default: false, null: false
+    t.integer "boost_factor", default: 0, null: false
+    t.datetime "boost_validity"
     t.index ["company_type_id"], name: "index_companies_on_company_type_id"
     t.index ["user_id"], name: "index_companies_on_user_id"
   end
@@ -143,6 +145,16 @@ ActiveRecord::Schema.define(version: 2021_02_21_122810) do
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
+  create_table "offers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "company_id"
+    t.text "text"
+    t.float "discount"
+    t.datetime "validity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_offers_on_company_id"
+  end
+
   create_table "payment_preferences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.integer "payment_type"
@@ -154,6 +166,18 @@ ActiveRecord::Schema.define(version: 2021_02_21_122810) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_payment_preferences_on_user_id"
+  end
+
+  create_table "payment_services", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "company_id"
+    t.string "service"
+    t.float "cost"
+    t.boolean "payed", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_payment_services_on_company_id"
+    t.index ["user_id"], name: "index_payment_services_on_user_id"
   end
 
   create_table "special_schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

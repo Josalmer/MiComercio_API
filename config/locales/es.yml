@@ -335,4 +335,6 @@ es:
     new_assessment_available:
       title: ¿Que tal ha sido su experiencia en %{company}?
       summary: Hemos visto que recientemente ha estado en %{company}, entre en MiComercio y valore su experiencia desde la vista de %{company}
+    offer:
+      title: Disfrute de una excelente oferta en %{company}
     

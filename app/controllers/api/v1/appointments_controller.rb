@@ -41,7 +41,7 @@ class Api::V1::AppointmentsController < Api::BaseController
 
     if appointment.update(removed_at: Time.current)
       if current_api_v1_user == appointment.company.user
-        appointment.create_user_notification('user_when_manager_cancel_appointment')
+        appointment.create_user_notification('user_when_manager_cancel_appointment') if appointment.user
       else
         appointment.create_manager_notification('manager_appointment_cancelled')
       end

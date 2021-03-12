@@ -8,10 +8,14 @@ class Company < ApplicationRecord
   has_many :special_schedules, dependent: :destroy
   has_many :appointments, dependent: :destroy
   has_many :user_company_assessments, dependent: :destroy
+  has_many :payment_services, dependent: :destroy
+  has_many :offers, dependent: :destroy
   belongs_to :company_type
 
   scope :by_manager, ->(id) { where(user_id: id) }
   scope :publisheds, -> { where(published: true) }
+  scope :ordered_by_boost, -> { order 'boost_factor DESC' }
+  scope :boosted, -> { where.not(boost_validity: nil) }
 
   delegate :category, to: :company_type
   delegate :type, to: :company_type
@@ -76,6 +80,12 @@ class Company < ApplicationRecord
         current_checking_day += 1.day
         break if current_checking_day >= limit
       end
+    end
+  end
+
+  def self.check_finished_boost
+    Company.boosted.each do |company|
+      company.update_columns(boost_factor: 0, boost_validity: nil) if company.boost_validity < Time.current
     end
   end
 
