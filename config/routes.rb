@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       patch 'boost_company' => 'payment_services#boost_company'
       patch 'create_offer' => 'payment_services#create_offer'
       resources :offers, only: %i[index]
+      resources :favorite_companies, only: %i[create destroy]
     end
   end
 end
