@@ -5,6 +5,7 @@ class Company < ApplicationRecord
   belongs_to :user
   has_one :address, dependent: :destroy
   has_many :company_hours, dependent: :destroy
+  has_many :favorite_companies, dependent: :destroy
   has_many :special_schedules, dependent: :destroy
   has_many :appointments, dependent: :destroy
   has_many :user_company_assessments, dependent: :destroy

@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_one :notification_preference, dependent: :destroy
   has_many :companies
   has_many :appointments, dependent: :destroy
+  has_many :favorite_companies, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :device_tokens, dependent: :destroy
   has_many :user_company_assessments, dependent: :destroy

@@ -18,6 +18,7 @@ json.validated company.user.validated_manager
 json.boostFactor company.boost_factor
 json.boostValidity company.boost_validity
 json.pendingUserAssessment company.pending_user_assessment(current_api_v1_user.id)
+json.addedToFavorites company.favorite_companies.by_user(current_api_v1_user.id).any?
 json.address do
   json.partial! 'api/v1/addresses/address', address: company.address if company.address&.direction != company.name
 end
