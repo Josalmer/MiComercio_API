@@ -33,6 +33,10 @@ class Api::V1::UsersController < Api::BaseController
     end
   end
 
+  def show_tutorial_off
+    current_api_v1_user.update_columns(show_tutorial: false)
+  end
+
   private
 
   def user_params
