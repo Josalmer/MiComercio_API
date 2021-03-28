@@ -49,4 +49,11 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
     }
     assert_response :success
   end
+
+  test 'success when desactivating user tutorial' do
+    user = users(:user)
+    sign_up(user)
+    patch '/api/v1/show_tutorial_off', as: :json, headers: @json_headers, params: { }
+    assert_response :success
+  end
 end

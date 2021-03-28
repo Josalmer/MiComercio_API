@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_01_172242) do
+ActiveRecord::Schema.define(version: 2021_03_21_171303) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -121,6 +121,15 @@ ActiveRecord::Schema.define(version: 2021_03_01_172242) do
     t.index ["user_id"], name: "index_device_tokens_on_user_id"
   end
 
+  create_table "favorite_companies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "company_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_favorite_companies_on_company_id"
+    t.index ["user_id"], name: "index_favorite_companies_on_user_id"
+  end
+
   create_table "notification_preferences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.boolean "active", default: true, null: false
@@ -221,6 +230,7 @@ ActiveRecord::Schema.define(version: 2021_03_01_172242) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "provider"
     t.text "social_token"
+    t.boolean "show_tutorial", default: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["jti"], name: "index_users_on_jti", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

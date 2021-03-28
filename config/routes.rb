@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       resource :device_tokens, only: %i[update], defaults: { format: :json }
       patch 'update_manager_preferences' => 'users#update_payment_preferences'
       patch 'update_notification_preferences' => 'users#update_notification_preferences'
+      patch 'show_tutorial_off' => 'users#show_tutorial_off'
       resources :companies
       resources :categories, only: %i[index]
       resources :types, only: %i[index]
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
       patch 'boost_company' => 'payment_services#boost_company'
       patch 'create_offer' => 'payment_services#create_offer'
       resources :offers, only: %i[index]
+      resources :favorite_companies, only: %i[create destroy]
     end
   end
 end
