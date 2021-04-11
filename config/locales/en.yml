@@ -1,33 +1,339 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  custom:
+    unauthorized_action: You are not authorized to perform this action.
+    admin_panel: Admin access
+    contact: Contact us
+    terms: Privacy and cookies policy
+    about: About us
+    organization_manager_validation: User must be organization manager
+    limit_must_be_0_or_higher: Limits cannot take negative value, 0 to not apply limits
+    not_overlap_hours: No overlapping hours allowed
+    not_overlap_dates: Dates cannot be overlapped
+    closing_time_after_opening: Closing time must be later than opening time
+    end_date_after_start: End date must be later than start date
+    only_company_or_schedule: Can only be associated with one business or special schedule
+    company_monthly_limit_reached: Reached limit of monthly appointments in this business
+    company_diary_limit_reached: Reached daily appointment limit in this business
+    no_appointment_available: Appointments have been sold out for the selected time.
+    created_by_manager_or_have_user: Cannot be assigned to a user if created by a manager
+    new_account_from_social: User does not exist, additional data required
+  unauthorized:
+    manage:
+      all: "You are not authorized to access that page."
+  activerecord:
+    models:
+      user: Users
+      address: Addresses
+      company: Business
+      company_category: Business categories
+      company_type: Business type
+      payment_preference: Payment preferences
+      notification_preference: Notification preferences
+      appointment: Appointment
+      special_schedule: Special period
+      company_hour: Opening hours
+      notification: Notifications
+      device_token: Device token
+    attributes:
+      user:
+        name: First name
+        surname: Last name
+        phone: Phone
+        organization_manager: Business manager
+        admin: Administrator
+        password: Password
+        created_at: Created on
+        updated_at: Updated on
+        payment_preference: Payment preferences
+        notification_preference: Notification preferences
+        notifications: Notifications
+        device_tokens: Device token
+      address:
+        town: Town
+        province: Province
+        country: Country
+        direction: Address
+        latitude: Latitude
+        longitude: Longitude
+      company:
+        user: Manager
+        company_type: Business Type
+        name: Name
+        diary_client_limit: Appointment limit per client per day
+        monthly_client_limit: Appointment limit per client per month
+        web: Business website
+        mail: Customer service email
+        phone: Telephone
+        description: Description
+        attached_file: Logo
+      company_category:
+        category: Category
+        company_type: Business type
+      company_type:
+        company_type: Type
+      payment_preference:
+        user: User
+        type: Payment type
+        number: Document number
+        bank: Bank
+        expiration_month: Expiration date, month
+        expiration_year: Expiration date, year
+        validated: Validated
+      notification_preference:
+        user: User
+        active: Active
+        user_1_week_before: Notice to user, 1 week before appointment
+        user_1_day_before: Notice to user, 1 day before appointment
+        user_1_hour_before: Notice to user, 1 hour before appointment
+        user_when_manager_cancel_appointment: Notice to user, when business owner cancels his appointment
+        manager_appointment_requested: Notice to business owner, when an appointment is booked
+        manager_appointment_cancelled: Notice to business owner, when an appointment is cancelled
+      notification:
+        title: Title
+        summary: Summary
+        body: Body
+        user: User
+      device_token:
+        token: Token
+        user: User
+    errors:
+      messages:
+        record_invalid: 'Validation failed: %{errors}'
+        restrict_dependent_destroy:
+          has_one: Cannot delete record because a dependent %{record} exists.
+          has_many: Cannot delete record because dependent %{record} exists.
+  date:
+    abbr_day_names:
+    - sun
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
+    abbr_month_names:
+    - 
+    - Jan
+    - Feb
+    - Mar
+    - Apr
+    - May
+    - Jun
+    - Jul
+    - Aug
+    - Sep
+    - Oct
+    - Nov
+    - dec
+    day_names:
+    - sunday
+    - monday
+    - tuesday
+    - wednesday
+    - thursday
+    - friday
+    - saturday
+    formats:
+      default: "%-d/%-m/%Y"
+      long: "%-d from %B from %Y"
+      short: "%-d of %b"
+    month_names:
+    - 
+    - january
+    - february
+    - march
+    - April
+    - May
+    - june
+    - july
+    - august
+    - september
+    - october
+    - november
+    - december
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: about 1 hour
+        other: about %{count} hours
+      about_x_months:
+        one: about 1 month
+        other: about %{count} months
+      about_x_years:
+        one: about 1 year
+        other: about %{count} years
+      almost_x_years:
+        one: about 1 year
+        other: almost %{count} years
+      half_a_minute: half a minute
+      less_than_x_seconds:
+        one: less than 1 second
+        other: less than %{count} seconds
+      less_than_x_minutes:
+        one: less than 1 minute
+        other: less than %{count} minutes
+      over_x_years:
+        one: more than 1 year
+        other: more than %{count} years
+      x_seconds:
+        one: 1 second
+        other: "%{count} seconds"
+      x_minutes:
+        one: 1 minute
+        other: "%{count} minutes"
+      x_days:
+        one: 1 day
+        other: "%{count} days"
+      x_months:
+        one: 1 month
+        other: "%{count} months"
+      x_years:
+        one: 1 year
+        other: "%{count} years"
+    prompts:
+      second: Second
+      minute: Minute
+      hour: Hour
+      day: Day
+      month: Month
+      year: year
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: must be accepted
+      blank: cannot be blank
+      confirmation: no match
+      empty: cannot be empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: is reserved
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      inclusion: is not included in the list
+      invalid: invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      model_invalid: 'Validation failed: %{errors}'
+      not_a_number: not a number
+      not_an_integer: must be an integer
+      odd: must be odd
+      other_than: must be different from %{count}
+      present: must be blank
+      required: must exist
+      taken: already in use
+      too_long:
+        one: is too long (1 character max.)
+        other: too long (%{count} characters maximum)
+      too_short:
+        one: is too short (1 character minimum)
+        other: is too short (%{count} characters minimum)
+      wrong_length:
+        one: not the right length (1 character exactly)
+        other: does not have the correct length (%{count} exact characters)
+    template:
+      body: 'Problems were encountered with the following fields:'
+      header:
+        one: Could not save this %{model} because 1 error was encountered
+        other: Could not save this %{model} because %{count} errors were encountered
+  helpers:
+    select:
+      prompt: please select
+    submit:
+      create: Create %{model}
+      submit: Save %{model}
+      update: Update %{model}
+  number:
+    currency:
+      format:
+        delimiter: "."
+        format: "%n %u"
+        precision: 2
+        separator: ","
+        significant: false
+        strip_insignificant_zeros: false
+        unit: "€"
+    format:
+      delimiter: "."
+      precision: 3
+      separator: ","
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: billion
+          million:
+            one: million
+            other: millions
+          quadrillion: thousand billion
+          thousand: mil
+          trillion:
+            one: billion
+            other: billions
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 1
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          eb: EB
+          gb: GB
+          kb: KB
+          mb: MB
+          pb: PB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+        format: "%n %"
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: " and "
+      two_words_connector: " and "
+      words_connector: ", "
+  time:
+    am: am
+    formats:
+      default: "%A, %-d of %B of %Y %H:%M:%S %z"
+      long: "%-d of %B of %Y %Y %H:%M"
+      short: "%-d of %b %H:%M"
+    pm: pm
+
+  notifications:
+    manager_appointment_requested:
+      title: An appointment has been requested at %{company}
+      summary: The user %{user} has requested an appointment at %{company} for %{date} at %{time}.
+    manager_appointment_cancelled:
+      title: An appointment has been cancelled at %{company}
+      summary: The user %{user} has cancelled his appointment from %{date} to %{time} in %{company}
+    user_1_week_before:
+      title: Appointment reminder this week
+      summary: We remind you that on %{date} you have an appointment at %{company}, 
+    user_1_day_before:
+      title: Appointment reminder tomorrow
+      summary: We remind you that tomorrow you have an appointment at %{company} at %{time}.
+    user_1_hour_before:
+      title: Appointment reminder in one hour
+      summary: We remind you that in one hour you have an appointment at %{company} at %{time}.
+    user_when_manager_cancel_appointment:
+      title: Your appointment has been canceled at %{company}
+      summary: You have canceled your appointment from %{date} to %{time} at %{company}.
+    new_assessment_available:
+      title: How was your experience at %{company}?
+      summary: We have seen that you have recently been to %{company}, log in to MyCommerce and rate your experience from the %{company} view.
+    offer:
+      title: Enjoy an excellent offer on %{company}
